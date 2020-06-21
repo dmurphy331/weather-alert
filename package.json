@@ -1,0 +1,23 @@
+{
+  "name": "weather-alert",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Darren Murphy <dmurphy331@googlemail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "start": "concurrently \"yarn run start-server\" \"yarn run start-client\"",
+    "stop": "yarn run stop-server",
+    "start-client": "cd client && yarn start",
+    "start-server": "cd server && yarn start",
+    "stop-server": "cd server && yarn stop",
+    "seed-data": "cd server && yarn seed-data"
+  },
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}

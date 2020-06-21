@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
+    "pm2": "^3.5.1"
+  },
+  "scripts": {
+    "start": "yarn start-mongodb && yarn start-server && yarn seed-data",
+    "stop": "yarn stop-mongodb && yarn stop-server",
+    "start-server": "pm2 start src/server.js --watch",
+    "start-mongodb": "docker run --name weather-alert-mongodb -e MONGO_INITDB_DATABASE=weatheralert -p 27017:27017 -d mongo:4.0.4 && echo 'Waiting for Mongodb to Boot...' && sleep 10 && echo 'Booted!'",
+    "stop-mongodb": "docker stop weather-alert-mongodb && docker rm weather-alert-mongodb",
+    "stop-server": "pm2 stop all",
+    "seed-data": "docker exec -i weather-alert-mongodb sh -c 'mongoimport -c cities -d weatheralert --drop --jsonArray' < ./data/city.list.json"
+  }
+}
