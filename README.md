@@ -4,9 +4,12 @@ City list JSON downloaded from openweather API.
 Tried inporting JSON locally but decided to move data to mongoDB and get using API vie expressJS for performance/scalabilty.
 
 > **TODO:**
-> - Interface and storage for adding/viewing favourites.
-> - Create Interface for current and forecasted weather.
+> - Add current weather info to favourite tile.
+> - Convert tile to link through to detail view.
+> - Create Interface for current and forecasted weather within detail view.
 > - Add API call for hourly forecast https://openweathermap.org/api/hourly-forecast
+> - Styling, responsive styling.
+> - Unit tests.
 
 # Setup
 

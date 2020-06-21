@@ -11,6 +11,14 @@ const FavouriteLocations = (props) => {
   const [favourites, setFavourites] = useState([]);
   const [maxReached, setMaxReached] = useState(false);
 
+  useEffect(() => {
+    setFavourites(JSON.parse(localStorage.getItem("favouriteCities")));
+  }, []);
+
+  const updatelocalstorage = (favourites) => {
+    localStorage.setItem("favouriteCities", JSON.stringify(favourites));
+  };
+
   const addFavouriteClick = (city) => {
     if (favourites.length === maxFavourites) {
       setMaxReached(true);
@@ -24,6 +32,7 @@ const FavouriteLocations = (props) => {
     let favouritesArray = [...favourites];
     favouritesArray.push(city);
     setFavourites(favouritesArray);
+    updatelocalstorage(favouritesArray);
     setMaxReached(false);
   };
 
@@ -33,6 +42,7 @@ const FavouriteLocations = (props) => {
       return favourite._id !== city._id;
     });
     setFavourites(favouritesArray);
+    updatelocalstorage(favouritesArray);
   };
 
   const filterCities = (event) => {
@@ -50,7 +60,7 @@ const FavouriteLocations = (props) => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         {maxReached ? (
           <Alert severity="warning">
             You can only add a maximum of six favourites.
@@ -64,7 +74,6 @@ const FavouriteLocations = (props) => {
                 id="city-search"
                 style={{ margin: 8 }}
                 placeholder="Search for a city"
-                fullWidth
                 margin="normal"
                 onChange={filterCities}
                 name="search"
@@ -85,7 +94,7 @@ const FavouriteLocations = (props) => {
           <h3>Loading.....</h3>
         )}
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={8}>
         <Grid container spacing={3}>
           {favourites &&
             favourites.map((favourite) => (

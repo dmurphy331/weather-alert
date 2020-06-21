@@ -14,7 +14,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 const useStyles = makeStyles({
   media: {
-    height: 140,
+    height: 120,
   },
 });
 
@@ -33,6 +33,7 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
             <IconButton
               aria-label="remove from favorites"
               onClick={removeFavourite}
+              color="secondary"
             >
               <HighlightOffIcon />
             </IconButton>
