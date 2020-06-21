@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextField, List, Grid } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 import SearchResultItem from "../../components/SearchResultItem";
 import FavouriteItem from "../../components/FavouriteItem";
@@ -8,19 +9,30 @@ const FavouriteLocations = (props) => {
   const maxFavourites = 6;
   const [cities, setCities] = useState();
   const [favourites, setFavourites] = useState([]);
+  const [maxReached, setMaxReached] = useState(false);
 
   const addFavouriteClick = (city) => {
-    let favouritesArray = [...favourites];
-    if (favouritesArray.length < maxFavourites) {
-      favouritesArray.push(city);
-      setFavourites(favouritesArray);
-    } else {
-      maxFavouritesReached();
+    if (favourites.length === maxFavourites) {
+      setMaxReached(true);
+      return;
     }
+
+    if (favourites.includes(city)) {
+      return;
+    }
+
+    let favouritesArray = [...favourites];
+    favouritesArray.push(city);
+    setFavourites(favouritesArray);
+    setMaxReached(false);
   };
 
-  const maxFavouritesReached = () => {
-    console.log("maxFavourites");
+  const removeFavouriteClick = (city) => {
+    setMaxReached(false);
+    let favouritesArray = [...favourites].filter((favourite) => {
+      return favourite._id !== city._id;
+    });
+    setFavourites(favouritesArray);
   };
 
   const filterCities = (event) => {
@@ -39,6 +51,12 @@ const FavouriteLocations = (props) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
+        {maxReached ? (
+          <Alert severity="warning">
+            You can only add a maximum of six favourites.
+          </Alert>
+        ) : null}
+
         {props.cities.fetched ? (
           <>
             <form>
@@ -71,7 +89,11 @@ const FavouriteLocations = (props) => {
         <Grid container spacing={3}>
           {favourites &&
             favourites.map((favourite) => (
-              <FavouriteItem key={favourite._id} city={favourite} />
+              <FavouriteItem
+                key={favourite._id}
+                city={favourite}
+                removeFavouriteClick={removeFavouriteClick}
+              />
             ))}
         </Grid>
       </Grid>
