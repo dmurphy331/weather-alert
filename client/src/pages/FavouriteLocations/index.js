@@ -59,16 +59,15 @@ const FavouriteLocations = (props) => {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={4}>
-        {maxReached ? (
-          <Alert severity="warning">
-            You can only add a maximum of six favourites.
-          </Alert>
-        ) : null}
-
-        {props.cities.fetched ? (
-          <>
+    <>
+      {props.cities.fetched ? (
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            {maxReached ? (
+              <Alert severity="warning">
+                You can only add a maximum of six favourites.
+              </Alert>
+            ) : null}
             <form>
               <TextField
                 id="city-search"
@@ -89,24 +88,24 @@ const FavouriteLocations = (props) => {
                   />
                 ))}
             </List>
-          </>
-        ) : (
-          <h3>Loading.....</h3>
-        )}
-      </Grid>
-      <Grid item xs={8}>
-        <Grid container spacing={3}>
-          {favourites &&
-            favourites.map((favourite) => (
-              <FavouriteItem
-                key={favourite._id}
-                city={favourite}
-                removeFavouriteClick={removeFavouriteClick}
-              />
-            ))}
+          </Grid>
+          <Grid item xs={8}>
+            <Grid container spacing={3}>
+              {favourites &&
+                favourites.map((favourite) => (
+                  <FavouriteItem
+                    key={favourite._id}
+                    city={favourite}
+                    removeFavouriteClick={removeFavouriteClick}
+                  />
+                ))}
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-    </Grid>
+      ) : (
+        <h3>Loading.....</h3>
+      )}
+    </>
   );
 };
 
