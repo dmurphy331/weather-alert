@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { TextField, List, Grid, Typography } from "@material-ui/core";
+import {
+  TextField,
+  List,
+  Grid,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import SearchResultItem from "../../components/SearchResultItem";
 import FavouriteItem from "../../components/FavouriteItem";
 
+const useStyles = makeStyles(() => ({
+  searchResultList: {
+    height: "400px",
+    overflow: "scroll",
+    border: "1px solid #DDD",
+    borderRadius: "0 0 4px 4px",
+    borderTop: "0",
+  },
+}));
+
 const FavouriteLocations = (props) => {
+  const classes = useStyles();
   const maxFavourites = 6;
   const [cities, setCities] = useState();
   const [favourites, setFavourites] = useState([]);
@@ -60,7 +77,7 @@ const FavouriteLocations = (props) => {
   return (
     <>
       {props.cities.fetched ? (
-        <Grid container spacing={3}>
+        <Grid container spacing={8}>
           <Grid item xs={12} sm={4}>
             {maxReached ? (
               <Alert severity="warning">
@@ -71,26 +88,29 @@ const FavouriteLocations = (props) => {
               <TextField
                 fullWidth
                 id="city-search"
-                style={{ margin: 8 }}
                 placeholder="Search for a city"
-                margin="normal"
                 onChange={filterCities}
                 name="search"
+                variant="outlined"
               />
             </form>
-            <List>
-              {cities &&
-                cities.map((city) => (
+            {cities ? (
+              <List className={classes.searchResultList}>
+                {cities.map((city) => (
                   <SearchResultItem
                     key={city._id}
                     city={city}
                     addFavouriteClick={addFavouriteClick}
                   />
                 ))}
-            </List>
+              </List>
+            ) : null}
           </Grid>
           <Grid item xs={12} sm={8}>
-            <Grid container spacing={3}>
+            <Typography variant="h6" gutterBottom>
+              Your favourite locations
+            </Typography>
+            <Grid container alignItems="stretch" spacing={3}>
               {favourites &&
                 favourites.map((favourite) => (
                   <FavouriteItem
@@ -103,7 +123,7 @@ const FavouriteLocations = (props) => {
           </Grid>
         </Grid>
       ) : (
-        <Typography variant="h3" gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Loading.....
         </Typography>
       )}

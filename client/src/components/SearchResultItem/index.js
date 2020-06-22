@@ -1,5 +1,11 @@
 import React from "react";
-import { Typography, makeStyles } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import {
+  Typography,
+  makeStyles,
+  ListItem,
+  ListItemSecondaryAction,
+} from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,19 +18,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchResultItem = (props) => {
+  const history = useHistory();
   const classes = useStyles();
+
   const addFavourite = () => {
     props.addFavouriteClick(props.city);
   };
 
+  const goToDetail = () => {
+    history.push(`/city/${props.city.id}`);
+  };
+
   return (
-    <div className={classes.searchResult} onClick={addFavourite}>
+    <ListItem button className={classes.searchResult} onClick={goToDetail}>
       <Typography variant="h5">
         {props.city.name} - {props.city.state ? props.city.state : null}{" "}
         {props.city.country}
       </Typography>
-      <AddCircleIcon />
-    </div>
+      <ListItemSecondaryAction button onClick={addFavourite}>
+        <AddCircleIcon />
+      </ListItemSecondaryAction>
+    </ListItem>
   );
 };
 

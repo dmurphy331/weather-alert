@@ -1,9 +1,15 @@
 # Approach
 
-City list JSON downloaded from openweather API.
-Tried inporting JSON locally but decided to move data to mongoDB and get using API vie expressJS for performance/scalabilty.
+- City list JSON downloaded from openweather API.
+- Tried inporting JSON locally but decided to move data to mongoDB and get using API vie expressJS for performance/scalabilty.
+
+## Improvements
+
+- Temperature units, celsius or faranheiht.
+- Add to favourite from detail page.
 
 > **TODO:**
+>
 > - Add current weather info to favourite tile.
 > - Convert tile to link through to detail view.
 > - Create Interface for current and forecasted weather within detail view.

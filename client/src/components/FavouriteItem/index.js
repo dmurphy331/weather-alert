@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
+  fullHeight: {
+    height: "100%",
+  },
 }));
 
 const FavouriteItem = ({ city, removeFavouriteClick }) => {
@@ -70,7 +73,6 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
         image = value;
       }
     }
-
     return image;
   };
 
@@ -83,8 +85,8 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
   };
 
   return (
-    <Grid item xs={12} sm={6}>
-      <Card>
+    <Grid item xs={12} md={4}>
+      <Card className={classes.fullHeight}>
         {data.fetched ? (
           <>
             <CardHeader
@@ -99,16 +101,33 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
               title={city.name}
             />
             <CardContent>
-              <Avatar alt="wind speed" src={Wind} className={classes.large} />
-              <Typography variant="h5" gutterBottom>
-                {data.weather.wind.speed}mph
-              </Typography>
-              <Avatar
-                alt="wind direction"
-                src={getWindDirectionImage(data.weather.wind.deg)}
-                className={classes.large}
-                variant="square"
-              />
+              <Grid container alignItems="center" spacing={3}>
+                <Grid item xs={12} sm={4}>
+                  <Avatar
+                    alt="wind speed"
+                    src={Wind}
+                    className={classes.large}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                  <Typography variant="h5" gutterBottom>
+                    {data.weather.wind.speed} mph
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Avatar
+                    alt="wind direction"
+                    src={getWindDirectionImage(data.weather.wind.deg)}
+                    className={classes.large}
+                    variant="square"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                  <Typography variant="h5" gutterBottom>
+                    {data.weather.wind.deg}&#176;
+                  </Typography>
+                </Grid>
+              </Grid>
             </CardContent>
             <CardActions>
               <Button size="small" color="primary" onClick={forecastClick}>

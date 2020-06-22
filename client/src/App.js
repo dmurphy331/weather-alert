@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       margin: theme.spacing(1),
     },
+    marginBottom: "15px",
   },
   logo: {
     width: theme.spacing(7),
@@ -45,10 +46,10 @@ const App = () => {
     <Router>
       <Container maxWidth="lg">
         <div className={classes.header}>
-          <img alt="Weather alert" src={logo} className={classes.logo} />
-          <Typography variant="h3" component="h1" gutterBottom>
-            Weather alert
+          <Typography variant="h2" component="h1" gutterBottom>
+            Wind check
           </Typography>
+          <img alt="Weather alert" src={logo} className={classes.logo} />
         </div>
 
         <Switch>
