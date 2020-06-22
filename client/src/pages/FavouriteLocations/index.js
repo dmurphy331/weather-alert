@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { TextField, List, Grid } from "@material-ui/core";
+import { TextField, List, Grid, Typography } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-
 import SearchResultItem from "../../components/SearchResultItem";
 import FavouriteItem from "../../components/FavouriteItem";
 
@@ -47,7 +46,7 @@ const FavouriteLocations = (props) => {
 
   const filterCities = (event) => {
     let value = event.target.value.toLowerCase();
-    if (value.length > 3) {
+    if (value.length > 3 && props.cities.results) {
       setCities(
         props.cities.results.filter((city) => {
           return city.name.toLowerCase().indexOf(value.toLowerCase()) > -1;
@@ -62,7 +61,7 @@ const FavouriteLocations = (props) => {
     <>
       {props.cities.fetched ? (
         <Grid container spacing={3}>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={4}>
             {maxReached ? (
               <Alert severity="warning">
                 You can only add a maximum of six favourites.
@@ -70,6 +69,7 @@ const FavouriteLocations = (props) => {
             ) : null}
             <form>
               <TextField
+                fullWidth
                 id="city-search"
                 style={{ margin: 8 }}
                 placeholder="Search for a city"
@@ -89,7 +89,7 @@ const FavouriteLocations = (props) => {
                 ))}
             </List>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={8}>
             <Grid container spacing={3}>
               {favourites &&
                 favourites.map((favourite) => (
@@ -103,7 +103,9 @@ const FavouriteLocations = (props) => {
           </Grid>
         </Grid>
       ) : (
-        <h3>Loading.....</h3>
+        <Typography variant="h3" gutterBottom>
+          Loading.....
+        </Typography>
       )}
     </>
   );

@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Container } from "@material-ui/core";
+import { Container, Typography, makeStyles } from "@material-ui/core";
 import FavouriteLocations from "./pages/FavouriteLocations";
 import DetailView from "./pages/DetailView";
+import logo from "./logo.png";
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  logo: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
 
 const App = () => {
+  const classes = useStyles();
   const [data, setData] = useState({
     results: null,
     fetched: false,
@@ -12,9 +27,12 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch("http://localhost:8080/cities").then((res) =>
-        res.json()
-      );
+      const data = await fetch("http://localhost:8080/cities").then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      });
       setData({
         results: data.data.cities,
         fetched: true,
@@ -26,7 +44,13 @@ const App = () => {
   return (
     <Router>
       <Container maxWidth="lg">
-        <h1>Weather alert</h1>
+        <div className={classes.header}>
+          <img alt="Weather alert" src={logo} className={classes.logo} />
+          <Typography variant="h3" component="h1" gutterBottom>
+            Weather alert
+          </Typography>
+        </div>
+
         <Switch>
           <Route path="/city/:id">
             <DetailView />
