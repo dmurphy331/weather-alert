@@ -1,7 +1,9 @@
 # Approach
 
 - City list JSON downloaded from openweather API.
+- openweather city list contains duplicates, different lat,lon values.
 - Tried inporting JSON locally but decided to move data to mongoDB and get using API vie expressJS for performance/scalabilty.
+- Current data and forecast data from APIs are different.
 
 ## Improvements
 

@@ -102,19 +102,19 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
             />
             <CardContent>
               <Grid container alignItems="center" spacing={3}>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={4}>
                   <Avatar
                     alt="wind speed"
                     src={Wind}
                     className={classes.large}
                   />
                 </Grid>
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={8}>
                   <Typography variant="h5" gutterBottom>
                     {data.weather.wind.speed} mph
                   </Typography>
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={4}>
                   <Avatar
                     alt="wind direction"
                     src={getWindDirectionImage(data.weather.wind.deg)}
@@ -122,7 +122,7 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
                     variant="square"
                   />
                 </Grid>
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={8}>
                   <Typography variant="h5" gutterBottom>
                     {data.weather.wind.deg}&#176;
                   </Typography>

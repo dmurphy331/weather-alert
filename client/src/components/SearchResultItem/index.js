@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import {
+  ListItemText,
   Typography,
   makeStyles,
   ListItem,
@@ -30,12 +31,9 @@ const SearchResultItem = (props) => {
   };
 
   return (
-    <ListItem button className={classes.searchResult} onClick={goToDetail}>
-      <Typography variant="h5">
-        {props.city.name} - {props.city.state ? props.city.state : null}{" "}
-        {props.city.country}
-      </Typography>
-      <ListItemSecondaryAction button onClick={addFavourite}>
+    <ListItem className={classes.searchResult} onClick={goToDetail}>
+      <ListItemText primary={props.city.name} secondary={props.city.country} />
+      <ListItemSecondaryAction onClick={addFavourite}>
         <AddCircleIcon />
       </ListItemSecondaryAction>
     </ListItem>

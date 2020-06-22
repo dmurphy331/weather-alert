@@ -28,7 +28,9 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch("http://localhost:8080/cities").then((res) => {
+      const data = await fetch(
+        `${process.env.REACT_APP_MONGO_DOMAIN}/cities`
+      ).then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }

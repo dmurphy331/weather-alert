@@ -5,6 +5,7 @@ import {
   Grid,
   Typography,
   makeStyles,
+  Snackbar,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import SearchResultItem from "../../components/SearchResultItem";
@@ -26,6 +27,11 @@ const FavouriteLocations = (props) => {
   const [cities, setCities] = useState();
   const [favourites, setFavourites] = useState([]);
   const [maxReached, setMaxReached] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setFavourites(JSON.parse(localStorage.getItem("favouriteCities")));
@@ -44,7 +50,7 @@ const FavouriteLocations = (props) => {
     if (favourites.includes(city)) {
       return;
     }
-
+    setOpen(true);
     let favouritesArray = [...favourites];
     favouritesArray.push(city);
     setFavourites(favouritesArray);
@@ -114,13 +120,23 @@ const FavouriteLocations = (props) => {
               {favourites &&
                 favourites.map((favourite) => (
                   <FavouriteItem
-                    key={favourite._id}
+                    key={favourite.id}
                     city={favourite}
                     removeFavouriteClick={removeFavouriteClick}
                   />
                 ))}
             </Grid>
           </Grid>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert onClose={handleClose} severity="success">
+              Your favourites have been updated.
+            </Alert>
+          </Snackbar>
         </Grid>
       ) : (
         <Typography variant="h6" gutterBottom>
