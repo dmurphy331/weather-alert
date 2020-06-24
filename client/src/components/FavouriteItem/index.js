@@ -92,6 +92,7 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
             <CardHeader
               action={
                 <IconButton
+                  data-testid="remove-from-favorites"
                   aria-label="remove from favorites"
                   onClick={removeFavourite}
                 >

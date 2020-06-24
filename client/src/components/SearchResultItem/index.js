@@ -31,9 +31,18 @@ const SearchResultItem = (props) => {
   };
 
   return (
-    <ListItem className={classes.searchResult} onClick={goToDetail}>
+    <ListItem
+      className={classes.searchResult}
+      data-testid="go-to-detail"
+      aria-label="See forecast"
+      onClick={goToDetail}
+    >
       <ListItemText primary={props.city.name} secondary={props.city.country} />
-      <ListItemSecondaryAction onClick={addFavourite}>
+      <ListItemSecondaryAction
+        data-testid="add-to-favourite"
+        aria-label="add to favourites"
+        onClick={addFavourite}
+      >
         <AddCircleIcon />
       </ListItemSecondaryAction>
     </ListItem>

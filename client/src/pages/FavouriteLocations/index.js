@@ -104,7 +104,7 @@ const FavouriteLocations = (props) => {
               <List className={classes.searchResultList}>
                 {cities.map((city) => (
                   <SearchResultItem
-                    key={city._id}
+                    key={city.id}
                     city={city}
                     addFavouriteClick={addFavouriteClick}
                   />

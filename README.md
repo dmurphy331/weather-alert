@@ -1,24 +1,3 @@
-# Approach
-
-- City list JSON downloaded from openweather API.
-- openweather city list contains duplicates, different lat,lon values.
-- Tried inporting JSON locally but decided to move data to mongoDB and get using API vie expressJS for performance/scalabilty.
-- Current data and forecast data from APIs are different.
-
-## Improvements
-
-- Temperature units, celsius or faranheiht.
-- Add to favourite from detail page.
-
-> **TODO:**
->
-> - Add current weather info to favourite tile.
-> - Convert tile to link through to detail view.
-> - Create Interface for current and forecasted weather within detail view.
-> - Add API call for hourly forecast https://openweathermap.org/api/hourly-forecast
-> - Styling, responsive styling.
-> - Unit tests.
-
 # Setup
 
 ## Requirements
@@ -49,3 +28,12 @@ After installing the requirements above, in the project directory run `yarn && y
 
 The client and server will reload if you make edits.
 You will also see any lint errors in the console.
+
+## Notes/Improvements
+
+- Temperature units, celsius or fahrenheit.
+- Add to favourites within detail page.
+- City list JSON downloaded from openweather website.
+- openweather city list contains duplicates, different lat,lon values.
+- Tried inporting JSON locally but decided to move data to mongoDB and retrive using expressJS API for performance/scalabilty.
+- Current weather data and forecast from APIs are different.
