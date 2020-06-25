@@ -35,5 +35,5 @@ You will also see any lint errors in the console.
 - Add to favourites within detail page.
 - City list JSON downloaded from openweather website.
 - openweather city list contains duplicates, different lat,lon values.
-- Tried inporting JSON locally but decided to move data to mongoDB and retrive using expressJS API for performance/scalabilty.
+- Tried importing JSON locally but decided to move data to mongoDB and retrive using expressJS API for performance/scalabilty.
 - Current weather data and forecast from APIs are different.

@@ -62,7 +62,7 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
   useEffect(() => {
     const fetchWeatherData = async () => {
       const data = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?id=${city.id}&appid=${process.env.REACT_APP_WEATHER_API}&units=imperial`
+        `${process.env.REACT_APP_WEATHER_API_URL}weather?id=${city.id}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=imperial`
       ).then((res) => res.json());
       setData({
         weather: data,

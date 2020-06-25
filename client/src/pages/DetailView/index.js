@@ -39,7 +39,7 @@ const DetailView = () => {
   useEffect(() => {
     const fetchCurrent = async () => {
       const data = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?id=${id}&appid=${process.env.REACT_APP_WEATHER_API}&units=imperial`
+        `${process.env.REACT_APP_WEATHER_API_URL}weather?id=${id}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=imperial`
       ).then((res) => res.json());
       setCurrentWeather({
         weather: data,
@@ -56,7 +56,7 @@ const DetailView = () => {
     const getForecast = async () => {
       if (currentWeather.weather) {
         const forecast = await fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${currentWeather.weather.coord.lat}&lon=${currentWeather.weather.coord.lon}&exclude=current,minutely,hourly&appid=${process.env.REACT_APP_WEATHER_API}&units=imperial`
+          `${process.env.REACT_APP_WEATHER_API_URL}onecall?lat=${currentWeather.weather.coord.lat}&lon=${currentWeather.weather.coord.lon}&exclude=current,minutely,hourly&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=imperial`
         ).then((res) => res.json());
         setForecastWeather({
           weather: forecast,
