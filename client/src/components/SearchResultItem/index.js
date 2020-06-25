@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import {
   ListItemText,
-  Typography,
   makeStyles,
   ListItem,
   ListItemSecondaryAction,
@@ -22,10 +21,16 @@ const SearchResultItem = (props) => {
   const history = useHistory();
   const classes = useStyles();
 
+  /*
+   * Handle add to favourite click event. Pass up the tree
+   */
   const addFavourite = () => {
     props.addFavouriteClick(props.city);
   };
 
+  /*
+   * Link to detail page
+   */
   const goToDetail = () => {
     history.push(`/city/${props.city.id}`);
   };

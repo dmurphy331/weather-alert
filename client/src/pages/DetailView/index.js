@@ -33,6 +33,9 @@ const DetailView = () => {
 
   let { id } = useParams();
 
+  /*
+   * Fetch current weather forecast from openweather API using city ID
+   */
   useEffect(() => {
     const fetchCurrent = async () => {
       const data = await fetch(
@@ -46,6 +49,9 @@ const DetailView = () => {
     fetchCurrent();
   }, [id]);
 
+  /*
+   * Fetch weather forecast from openweather API using city lat/lon coord's
+   */
   useEffect(() => {
     const getForecast = async () => {
       if (currentWeather.weather) {
@@ -61,6 +67,9 @@ const DetailView = () => {
     getForecast();
   }, [currentWeather.weather]);
 
+  /*
+   * Link back to home screen
+   */
   const backClick = () => {
     history.push("/");
   };

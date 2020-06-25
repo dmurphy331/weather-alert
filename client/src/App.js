@@ -27,7 +27,10 @@ const App = () => {
   });
 
   useEffect(() => {
-    // Fetch city data from mongoDB
+    /*
+     * Fetch city data from mongoDB
+     */
+
     const fetchData = async () => {
       const data = await fetch(
         `${process.env.REACT_APP_MONGO_DOMAIN}/cities`

@@ -29,35 +29,60 @@ const FavouriteLocations = (props) => {
   const [maxReached, setMaxReached] = useState(false);
   const [open, setOpen] = useState(false);
 
+  /*
+   * Closing the snackbar
+   */
   const handleClose = () => {
     setOpen(false);
   };
 
   useEffect(() => {
+    /*
+     * Set favourites based on values retrieve from local storage.
+     */
     setFavourites(JSON.parse(localStorage.getItem("favouriteCities")));
   }, []);
 
+  /*
+   * Update local storage
+   */
   const updatelocalstorage = (favourites) => {
     localStorage.setItem("favouriteCities", JSON.stringify(favourites));
   };
 
+  /*
+   * Add to favourites
+   */
   const addFavouriteClick = (city) => {
+    /*
+     * Handle max favourites
+     */
     if (favourites.length === maxFavourites) {
       setMaxReached(true);
       return;
     }
 
+    /*
+     * Handle existing items in favourites
+     */
     if (favourites.includes(city)) {
       return;
     }
-    setOpen(true);
+
+    /*
+     * Update favourites and show snackbar
+     */
     let favouritesArray = [...favourites];
     favouritesArray.push(city);
     setFavourites(favouritesArray);
     updatelocalstorage(favouritesArray);
     setMaxReached(false);
+    setOpen(true);
   };
 
+  /*
+   * Remove from favourites
+   */
   const removeFavouriteClick = (city) => {
     setMaxReached(false);
     let favouritesArray = [...favourites].filter((favourite) => {
@@ -67,6 +92,9 @@ const FavouriteLocations = (props) => {
     updatelocalstorage(favouritesArray);
   };
 
+  /*
+   * Filter cities for search results
+   */
   const filterCities = (event) => {
     let value = event.target.value.toLowerCase();
     if (value.length > 3 && props.cities.results) {

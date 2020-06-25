@@ -34,10 +34,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FavouriteItem = ({ city, removeFavouriteClick }) => {
+  const classes = useStyles();
+  const history = useHistory();
   const [data, setData] = useState({
     weather: null,
     fetched: false,
   });
+
+  /*
+   * Mapping object for wind deg and image
+   */
   const windDirection = {
     0: North,
     24: NorthEast,
@@ -49,9 +55,10 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
     294: NothWest,
     337: North,
   };
-  const classes = useStyles();
-  const history = useHistory();
 
+  /*
+   * Fetch current weather forecast from openweather API
+   */
   useEffect(() => {
     const fetchWeatherData = async () => {
       const data = await fetch(
@@ -66,6 +73,9 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
     fetchWeatherData();
   }, [city]);
 
+  /*
+   * Get wind diretion image based on deg from openweather API
+   */
   const getWindDirectionImage = (direction) => {
     let image = "";
     for (const [key, value] of Object.entries(windDirection)) {
@@ -76,10 +86,16 @@ const FavouriteItem = ({ city, removeFavouriteClick }) => {
     return image;
   };
 
+  /*
+   * Link to detail page
+   */
   const forecastClick = () => {
     history.push(`/city/${city.id}`);
   };
 
+  /*
+   * Remove from favourites
+   */
   const removeFavourite = () => {
     removeFavouriteClick(city);
   };
